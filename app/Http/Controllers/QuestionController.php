@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\QuestionRequest;
+use App\Http\Requests\UpdateRequest;
+use App\Http\Resources\QuestionResource;
+use App\Models\Question;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
@@ -11,54 +15,32 @@ class QuestionController extends Controller
      */
     public function index()
     {
-        return ["name"=> "kritisha"];
+       return Question::all();
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(QuestionRequest $request)
     {
-        //
+        $validate = $request->validated();
+        $question = Question::create($validate);
+        return new QuestionResource($question);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function show(Question $question)
     {
-        //
+       return new QuestionResource($question);
+    }
+    public function update(UpdateRequest $request, Question $question)
+    {
+        $validate = $request->validated();
+        $question->update($validate);
+        return new QuestionResource($question);
+
+        
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function destroy(Question $question)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+       $question->delete();
+       return ['result'=>"sucessfully deleted from the datbase"];
     }
 }
