@@ -24,17 +24,20 @@ class QuestionRequest extends FormRequest
     {
         return [
             'title' => "string|required|max:255",
-            'slug' => "string|required|max:255|unique:questions",
+            'slug' => "nullable|max:255|unique:questions",
             'description' => "string|nullable|max:5000",
             'options' => "array|required",
-            'answer' => ['required', function ($attribute, $value, $fail) {
-                $options = $this->input('options', []);
-                if (!in_array($value, $options)) {
-                    $fail($attribute . ' is not one of the valid options.');
-                }
-            }],
+            'answer' => 'required|string|in:' . implode(',', $this->input('options', [])),
             "weightage" => "required|integer|min:10",
             "status" => "boolean|nullable"
         ];
+    }
+    public function messages():array
+    {
+        return[
+            'answer.in'=>"Answer must be one from the options",
+
+        ];
+
     }
 }

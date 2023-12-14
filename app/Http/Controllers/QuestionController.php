@@ -6,23 +6,20 @@ use App\Http\Requests\QuestionRequest;
 use App\Http\Requests\UpdateQuestionRequest;
 use App\Http\Resources\QuestionResource;
 use App\Models\Question;
-use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
    
     public function index()
     {
-       $questions= Question::all();
+       $questions= Question::paginate(5);
        return  QuestionResource::collection($questions);
- 
     }
 
     public function store(QuestionRequest $request)
     {
-        $validate = $request->validated();
-        $question = Question::create($validate);
+        $data = $request->validated();
+        $question = Question::create($data);
         return new QuestionResource($question);
     }
 
@@ -31,11 +28,12 @@ class QuestionController extends Controller
        return new QuestionResource($question);
     }
 
-    public function update(UpdateQuestionRequest $request, Question $question)
+    public function update( UpdateQuestionRequest $request ,Question $question)
     {
-        $validate = $request->validated();
-        $question -> update($validate);
-        return new QuestionResource($question);  
+        $data = $request->validated(); 
+       $question->update($data);
+       return new QuestionResource($question);
+        
     }
 
     public function destroy(Question $question)
