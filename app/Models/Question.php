@@ -8,17 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     use HasFactory;
+    protected $table = "questions";
     protected $fillable = [
-        'title',
-        'description',
-        'slug',
-        'options',
-        'answer',
-        'weightage',
-        'status'
+        "title","slug","description","options","answer","status","weightage"
     ];
 
     protected $casts = [
-        'options'=> 'array'
+        'options'=> 'json'
     ];
 }

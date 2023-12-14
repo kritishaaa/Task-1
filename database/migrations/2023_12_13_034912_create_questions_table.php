@@ -12,15 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('questions', function (Blueprint $table) {
-            $table -> id();
-            $table -> string('title');
-            $table -> longText('description');
-            $table -> string('slug')->unique();
-            $table -> json('options');
-            $table -> unsignedInteger('answer');
-            $table -> unsignedBigInteger('weightage');
-            $table -> enum('status',['active','inactive'])->default('active');
-            $table -> timestamps();
+            $table->id();
+            $table->string("title");
+            $table->string("slug")->unique();
+            $table->text("description")->nullable();
+            $table->json("options");
+            $table->string("answer");
+            $table->string("weightage");
+            $table->boolean('status')->default(1);
+            $table->timestamps();
         });
     }
 

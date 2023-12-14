@@ -3,19 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\QuestionRequest;
-use App\Http\Requests\UpdateRequest;
+use App\Http\Requests\UpdateQuestionRequest;
 use App\Http\Resources\QuestionResource;
 use App\Models\Question;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index()
     {
-       return Question::all();
+       $questions= Question::paginate(10);
+       return new QuestionResource($questions);
     }
 
     public function store(QuestionRequest $request)
@@ -29,13 +29,12 @@ class QuestionController extends Controller
     {
        return new QuestionResource($question);
     }
-    public function update(UpdateRequest $request, Question $question)
+
+    public function update(UpdateQuestionRequest $request, Question $question)
     {
         $validate = $request->validated();
-        $question->update($validate);
-        return new QuestionResource($question);
-
-        
+        $question -> update($validate);
+        return new QuestionResource($question);  
     }
 
     public function destroy(Question $question)

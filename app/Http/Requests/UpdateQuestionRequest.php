@@ -5,8 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Validator;
 
-
-class QuestionRequest extends FormRequest
+class UpdateQuestionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +24,7 @@ class QuestionRequest extends FormRequest
     {
         return [
             'title' => "string|required|max:255",
-            'slug' => "string|required|max:255|unique:questions",
+            'slug' => "string|required|max:255|unique:questions,slug,{$this->route('question')->id}",
             'description' => "string|nullable|max:5000",
             'options' => "array|required",
             'answer' => ['required', function ($attribute, $value, $fail) {
@@ -34,9 +33,9 @@ class QuestionRequest extends FormRequest
                     $fail($attribute . ' is not one of the valid options.');
                 }
             }],
-
-            "weightage" => "required|integer|min:10",
+            "weightage" => "integer|required|min:10",
             "status" => "boolean|nullable"
         ];
     }
+    
 }

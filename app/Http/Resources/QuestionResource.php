@@ -15,12 +15,10 @@ class QuestionResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'title'=> $this->title,
-            'options'=>$this->options,
-            'weightage'=>$this->weightage,
-            'status' => $this->status === 'inactive'? 0: 1,
-            // 'status' => $this->status === 'active'? 1: 0,
-
+            'title' => $this->title,
+            'options' => $this->options,
+            'weightage' => $this->weightage,
+            'status' => $this->status ? "Active" : "Inactive"
         ];
 
     }
