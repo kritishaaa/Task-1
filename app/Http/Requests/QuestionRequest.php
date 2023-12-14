@@ -3,7 +3,6 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Validation\Validator;
 
 
 class QuestionRequest extends FormRequest
@@ -34,7 +33,6 @@ class QuestionRequest extends FormRequest
                     $fail($attribute . ' is not one of the valid options.');
                 }
             }],
-
             "weightage" => "required|integer|min:10",
             "status" => "boolean|nullable"
         ];

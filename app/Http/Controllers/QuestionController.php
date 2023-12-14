@@ -14,8 +14,9 @@ class QuestionController extends Controller
    
     public function index()
     {
-       $questions= Question::paginate(10);
-       return new QuestionResource($questions);
+       $questions= Question::all();
+       return  QuestionResource::collection($questions);
+ 
     }
 
     public function store(QuestionRequest $request)
