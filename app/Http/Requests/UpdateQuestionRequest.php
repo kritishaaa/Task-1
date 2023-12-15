@@ -22,7 +22,7 @@ class UpdateQuestionRequest extends FormRequest
      */
     public function rules(): array
     {
-       
+
         return [
             'title' => 'required|string|max:255',
             'slug' => 'required|string|max:255|unique:questions,slug,' . $this->route('question')->id,
@@ -33,12 +33,24 @@ class UpdateQuestionRequest extends FormRequest
             'status' => 'nullable|boolean',
         ];
     }
-    public function messages():array
+    public function messages(): array
     {
-        return[
-            'answer.in'=>"Answer must be one from the options",
+        return [
+            'answer.in' => "Answer must be one from the options",
         ];
 
     }
-    
+
 }
+
+
+
+
+
+
+
+
+
+
+
+

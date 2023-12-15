@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 
 
-class QuestionRequest extends FormRequest
+class StoreQuestionRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -32,10 +32,10 @@ class QuestionRequest extends FormRequest
             "status" => "boolean|nullable"
         ];
     }
-    public function messages():array
+    public function messages(): array
     {
-        return[
-            'answer.in'=>"Answer must be one from the options",
+        return [
+            'answer.in' => "Answer must be one from the options",
 
         ];
 
