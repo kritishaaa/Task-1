@@ -28,7 +28,7 @@ class StoreQuestionRequest extends FormRequest
             'description' => "string|nullable|max:5000",
             'options' => "array|required",
             'answer' => 'required|string|in:' . implode(',', $this->input('options', [])),
-            "weightage" => "required|integer|min:10",
+            "weightage" => "required|integer|min:10|max:20",
             "status" => "boolean|nullable"
         ];
     }

@@ -9,25 +9,37 @@ use App\Models\Question;
 
 class QuestionController extends Controller
 {
+  
 
    public function index()
    {
       $questions = Question::paginate(5);
       return QuestionResource::collection($questions);
    }
-
-   public function store(StoreQuestionRequest $request)
+   
+   /**
+    *  @param StoreQuestionRequest $request
+    * @return QuestionResource
+    */
+   public function store(StoreQuestionRequest $request) : QuestionResource
    {
       $data = $request->validated();
       $question = Question::create($data);
       return new QuestionResource($question);
    }
 
-   public function show(Question $question)
+   /** @param Question $question
+    *  @return QuestionResource
+    */
+   public function show(Question $question): QuestionResource
    {
       return new QuestionResource($question);
    }
-
+    /**
+     * @param UpdateQuestionRequest $request
+     * @param Question $question
+     * @return QuestionResource
+     */
    public function update(UpdateQuestionRequest $request, Question $question)
    {
       $data = $request->validated();
@@ -36,9 +48,13 @@ class QuestionController extends Controller
 
    }
 
+    /**
+     * @param Question $question
+     * 
+     */
    public function destroy(Question $question)
    {
       $question->delete();
-      return ['result' => "sucessfully deleted from the datbase"];
+      return response()->noContent(); 
    }
 }

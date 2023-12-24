@@ -29,7 +29,7 @@ class UpdateQuestionRequest extends FormRequest
             'description' => 'nullable|string|max:5000',
             'options' => 'required|array',
             'answer' => 'required|string|in:' . implode(',', $this->input('options', [])),
-            'weightage' => 'required|integer|min:10',
+            'weightage' => 'required|integer|min:10|max:20',
             'status' => 'nullable|boolean',
         ];
     }
