@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Api;
 
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -24,6 +24,7 @@ class StoreQuestionRequest extends FormRequest
     {
         return [
             'title' => "string|required|max:255",
+            'category_id' => "required|exists:question_categories,id",
             'slug' => "nullable|max:255|unique:questions",
             'description' => "string|nullable|max:5000",
             'options' => "array|required",

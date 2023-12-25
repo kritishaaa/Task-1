@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Api;
 
-use App\Http\Requests\StoreQuestionRequest;
-use App\Http\Requests\UpdateQuestionRequest;
+use App\Http\Controllers\Controller;
+use App\Http\Requests\Api\StoreQuestionRequest;
+use App\Http\Requests\Api\UpdateQuestionRequest;
 use App\Http\Resources\QuestionResource;
 use App\Models\Question;
 
 class QuestionController extends Controller
 {
-  
-
    public function index()
    {
       $questions = Question::paginate(5);
@@ -24,7 +23,7 @@ class QuestionController extends Controller
    public function store(StoreQuestionRequest $request) : QuestionResource
    {
       $data = $request->validated();
-      $question = Question::create($data);
+      $question = Question::create($data)->fresh();
       return new QuestionResource($question);
    }
 
@@ -50,7 +49,6 @@ class QuestionController extends Controller
 
     /**
      * @param Question $question
-     * 
      */
    public function destroy(Question $question)
    {

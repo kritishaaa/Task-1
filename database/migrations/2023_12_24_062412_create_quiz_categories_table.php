@@ -11,15 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('questions', function (Blueprint $table) {
+        Schema::create('quiz_categories', function (Blueprint $table) {
             $table->id();
-            $table->string("title");
-            $table->string("slug")->unique();
-            $table->text("description")->nullable();
-            $table->json("options");
-            $table->string("answer");
-            $table->string("weightage");
-            $table->boolean('status')->default(1);
+            $table -> string('title');
+            $table -> string('slug')->unique();
+            $table-> softDeletes();
             $table->timestamps();
         });
     }
@@ -29,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('questions');
+        Schema::dropIfExists('quiz_categories');
     }
 };

@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\QuestionController;
+use App\Http\Controllers\Api\QuestionCategoryController;
+use App\Http\Controllers\Api\QuestionController;
+use App\Http\Controllers\QuestionsByCategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,3 +22,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 Route::apiResource('questions',QuestionController::class);
+Route::apiResource('/question-categories',QuestionCategoryController::class);
+
+
+Route::get("/question-categories/{questionCategory}/questions", QuestionsByCategoryController::class);
