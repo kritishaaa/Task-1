@@ -20,4 +20,6 @@ class QuizCategory extends Model
     {
         return $this->hasMany(Quiz::class, 'category_id');
     }
+ 
+
 }

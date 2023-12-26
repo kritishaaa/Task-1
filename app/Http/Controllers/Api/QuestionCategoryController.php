@@ -14,7 +14,7 @@ class QuestionCategoryController extends Controller
     /**
      * 
      */
-    public function index()
+    public function index() 
     {
        $questionCategories = QuestionCategory::paginate(10);
        return QuestionCategoryResource::collection($questionCategories);
@@ -26,7 +26,7 @@ class QuestionCategoryController extends Controller
      * @param QuestionCategoryStoreRequest $request
      * @return QuestionCategoryResource
      */
-    public function store(QuestionCategoryStoreRequest $request)
+    public function store(QuestionCategoryStoreRequest $request) : QuestionCategoryResource
     {
         $data = $request->validated();
         $questionCategory = QuestionCategory::create($data);
@@ -37,7 +37,7 @@ class QuestionCategoryController extends Controller
      * @param QuestionCategory $questionCategory
      * @return QuestionCategoryResource
      */
-    public function show(QuestionCategory $questionCategory)
+    public function show(QuestionCategory $questionCategory) : QuestionCategoryResource
     {
         return new QuestionCategoryResource($questionCategory);
     }
@@ -47,7 +47,7 @@ class QuestionCategoryController extends Controller
      * @param  QuestionCategory $questionCategory
      * @return QuestionCategoryResource
      */
-    public function update(QuestionCategoryUpdateRequest $request, QuestionCategory $questionCategory)
+    public function update(QuestionCategoryUpdateRequest $request, QuestionCategory $questionCategory) : QuestionCategoryResource
     {
         $data = $request->validated();
         $questionCategory->update($data);
@@ -56,12 +56,11 @@ class QuestionCategoryController extends Controller
 
     /**
      * @param QuestionCategory $questionCategory
+     * @return void
      */
     public function destroy( QuestionCategory $questionCategory)
     {
         $questionCategory->delete();
-        return response()->json([
-            "message"=>"deleted sucessfully"
-        ]);
+        return response()->noContent();
     }
 }

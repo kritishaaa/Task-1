@@ -20,7 +20,8 @@ class QuizController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @param QuizStoreRequest
+     * @return QuizResource
      */
     public function store(QuizStoreRequest $request)
     {
@@ -38,7 +39,9 @@ class QuizController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * @param QuizUpdateRequest $request
+     * @param Quiz $quiz
+     * @return QuizResource
      */
     public function update(QuizUpdateRequest $request, Quiz $quiz) : QuizResource
     {
@@ -48,7 +51,8 @@ class QuizController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @param Quiz $quiz
+     * @return void
      */
     public function destroy(Quiz $quiz)
     {

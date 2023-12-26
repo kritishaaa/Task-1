@@ -30,6 +30,7 @@ class QuizStoreRequest extends FormRequest
             'time' => 'nullable|integer|min:0',
             'retry_after' => 'nullable|integer|min:0', 
             'status' => 'nullable|boolean',
+            'question_id'=>'required|exists:questions,id'
         ];
     }
 }

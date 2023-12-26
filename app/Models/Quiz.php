@@ -12,7 +12,7 @@ class Quiz extends Model
     protected $table = "quizzes";
 
     protected $fillable = [
-        'title', 'slug', 'category_id', 'thumbnail', 'description', 'retry_after', 'status'
+        'title', 'slug', 'category_id', 'thumbnail', 'description', 'retry_after', 'status', 'question_id'
     ];
 
 
@@ -20,11 +20,11 @@ class Quiz extends Model
     {
         return $this->belongsTo(QuizCategory::class, "category_id");
     }
-    
-    // public function questions()
-    // {
-    //     return $this-> hasMany(Question::class,'category_id'); 
-    // }
+
+    public function questions()
+    {
+        return $this-> hasMany(Question::class,'question_id'); 
+    }
 
 
 }

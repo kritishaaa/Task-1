@@ -6,9 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Api\QuizCategoryStoreRequest;
 use App\Http\Requests\Api\QuizCategoryUpdateRequest;
 use App\Http\Resources\QuizCategoryResource;
-use App\Models\Quiz;
 use App\Models\QuizCategory;
-use Illuminate\Http\Request;
 
 class QuizCategoryController extends Controller
 {
@@ -17,40 +15,30 @@ class QuizCategoryController extends Controller
      */
     public function index()
     {
-        //
+        $quizCategory=QuizCategory::paginate(10);
+        return QuizCategoryResource::collection($quizCategory);
     }
 
     /**
-     * Store a newly created resource in storage.
+     * @param QuizCategoryStoreRequest $request
+     * @return QuizCategoryResource
      */
-    public function store(QuizCategoryStoreRequest $request)
+    public function store(QuizCategoryStoreRequest $request) : QuizCategoryResource
     {
         $data = $request->validated();
-        $quizCategory = Quiz::create($data);
+        $quizCategory = QuizCategory::create($data);
         return new QuizCategoryResource($quizCategory);
+       
+
 
     }
 
     /**
-     * Display the specified resource.
+     * @param QuizCategoryUpdateRequest $request
+     * @param QuizCategory $quizCategory
+     * @return QuizCategoryResource
      */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(QuizCategoryUpdateRequest $request, QuizCategory $quizCategory)
+    public function update(QuizCategoryUpdateRequest $request, QuizCategory $quizCategory) : QuizCategoryResource
     {
         $data = $request->validated();
         $quizCategory->update($data);
@@ -59,7 +47,8 @@ class QuizCategoryController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * @param QuizCategory $quizCategory
+     * @return void
      */
     public function destroy(QuizCategory $quizCategory)
     {

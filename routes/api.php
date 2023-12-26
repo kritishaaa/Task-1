@@ -5,6 +5,7 @@ use App\Http\Controllers\Api\QuestionController;
 use App\Http\Controllers\Api\QuestionsByCategoryController;
 use App\Http\Controllers\Api\QuizCategoryController;
 use App\Http\Controllers\Api\QuizController;
+use App\Http\Controllers\Api\QuizQuestionController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -30,4 +31,5 @@ Route::get("/question-categories/{questionCategory}/questions", QuestionsByCateg
 
 Route::apiResource('/quiz',QuizController::class);
 Route::apiResource('/quiz-categories',QuizCategoryController::class);
-// Route::get('/quiz-categories/{quizCategory}/questions',QuizCategoryController::class);
+// Route::get('/quiz/{quizCategory}/questions',QuizQuestionController::class);
+Route::get('/quizzes/{id}/with-questions', [QuizQuestionController::class, 'showWithQuestions']);
