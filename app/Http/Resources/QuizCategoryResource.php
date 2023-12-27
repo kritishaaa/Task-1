@@ -18,7 +18,7 @@ class QuizCategoryResource extends JsonResource
             'id' => $this->id,
             'title' => $this->title,
             'slug' => $this->slug,
-            // 'questions' => QuestionResource::collection($this->whenLoaded('questions'))
+            'questions' => QuestionResource::collection($this->whenLoaded('questions'))
         ];
     }
 }

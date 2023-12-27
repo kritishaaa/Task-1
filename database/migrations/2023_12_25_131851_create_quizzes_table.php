@@ -22,8 +22,6 @@ return new class extends Migration
             $table->integer('time')->nullable();
             $table->integer('retry_after')->nullable();
             $table->boolean('status')->default(1);
-            $table->unsignedBigInteger('question_id');
-            $table->foreign('question_id')->references('id')->on('questions');
             $table->softDeletes();
             $table->timestamps();
         });

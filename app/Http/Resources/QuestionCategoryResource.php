@@ -22,3 +22,5 @@ class QuestionCategoryResource extends JsonResource
         ];
     }
 }
+
+

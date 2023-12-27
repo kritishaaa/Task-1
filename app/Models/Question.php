@@ -12,7 +12,7 @@ class Question extends Model
     use HasFactory, SoftDeletes;
     protected $table = "questions";
     protected $fillable = [
-        "title","category_id","slug","description","options","answer","status","weightage"
+        "title","category_id","slug","description","options","answer","status","weightage","quiz_id"
     ];
 
     protected $casts = [
@@ -22,5 +22,10 @@ class Question extends Model
     public function category(): BelongsTo
     {
         return $this -> belongsTo(QuestionCategory::class,'category_id');
+    }
+
+    public function quiz(): BelongsTo
+    {
+        return $this -> belongsTo(Quiz::class);
     }
 }
